@@ -1,0 +1,117 @@
+media:
+  input: public/media
+  output: /media
+  rename: safe
+
+content:
+  - name: projects
+    label: Dự án / Projects
+    type: collection
+    path: content/projects
+    format: json
+    filename: "{fields.slug}.json"
+    view:
+      primary: titleVi
+      fields: [titleVi, category, year, published, demo]
+      sort: [order, year, titleVi]
+      search: [titleVi, titleEn, category]
+    fields:
+      - { name: slug, label: URL slug (không dấu), type: string, required: true, pattern: "^[a-z0-9-]+$" }
+      - { name: titleVi, label: Tên dự án (VI), type: string, required: true }
+      - { name: titleEn, label: Project name (EN), type: string, required: true }
+      - { name: year, label: Năm, type: number, required: true }
+      - name: category
+        label: Danh mục
+        type: select
+        options:
+          values:
+            - { name: branding, label: Branding / Identity }
+            - { name: digital, label: Digital / UI UX }
+            - { name: artdirection, label: Art Direction }
+            - { name: graphic, label: Graphic Design }
+            - { name: experiment, label: Experiments }
+      - { name: categoryLabel, label: Tên danh mục hiển thị, type: string }
+      - { name: client, label: Khách hàng (nếu có), type: string }
+      - { name: roleVi, label: Vai trò (VI), type: string }
+      - { name: roleEn, label: Role (EN), type: string }
+      - { name: summaryVi, label: Mô tả ngắn (VI), type: text }
+      - { name: summaryEn, label: Short summary (EN), type: text }
+      - { name: bodyVi, label: Case study (VI), type: rich-text }
+      - { name: bodyEn, label: Case study (EN), type: rich-text }
+      - { name: cover, label: Ảnh bìa, type: image }
+      - { name: gallery, label: Bộ ảnh dự án, type: image, list: true }
+      - { name: order, label: Thứ tự hiển thị (số nhỏ lên trước), type: number }
+      - { name: featured, label: Hiển thị ở trang chủ, type: boolean }
+      - { name: published, label: Xuất bản, type: boolean }
+      - { name: demo, label: Đây là dự án minh họa, type: boolean }
+
+  - name: posts
+    label: Bài viết / Journal
+    type: collection
+    path: content/posts
+    format: json
+    filename: "{fields.slug}.json"
+    view:
+      primary: titleVi
+      fields: [titleVi, date, published]
+      sort: [date, titleVi]
+    fields:
+      - { name: slug, label: URL slug, type: string, required: true, pattern: "^[a-z0-9-]+$" }
+      - { name: titleVi, label: Tiêu đề (VI), type: string, required: true }
+      - { name: titleEn, label: Title (EN), type: string, required: true }
+      - { name: date, label: Ngày đăng, type: date }
+      - { name: category, label: Chủ đề, type: string }
+      - { name: excerptVi, label: Tóm tắt (VI), type: text }
+      - { name: excerptEn, label: Summary (EN), type: text }
+      - { name: bodyVi, label: Nội dung (VI), type: rich-text }
+      - { name: bodyEn, label: Content (EN), type: rich-text }
+      - { name: cover, label: Ảnh bìa, type: image }
+      - { name: published, label: Xuất bản, type: boolean }
+      - { name: demo, label: Bài mẫu, type: boolean }
+
+  - name: profile
+    label: Thông tin cá nhân & liên hệ
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: name, label: Họ tên, type: string }
+      - { name: brand, label: Logo dạng chữ, type: string }
+      - { name: roleVi, label: Chức danh (VI), type: string }
+      - { name: roleEn, label: Role (EN), type: string }
+      - { name: heroEyebrowVi, label: Dòng mở đầu (VI), type: string }
+      - { name: heroEyebrowEn, label: Eyebrow (EN), type: string }
+      - { name: heroTitleVi, label: Tiêu đề lớn (VI), type: text }
+      - { name: heroTitleEn, label: Hero title (EN), type: text }
+      - { name: heroIntroVi, label: Giới thiệu đầu trang (VI), type: text }
+      - { name: heroIntroEn, label: Intro (EN), type: text }
+      - { name: bioShortVi, label: Tóm tắt (VI), type: text }
+      - { name: bioShortEn, label: Summary (EN), type: text }
+      - { name: bioVi, label: Tiểu sử (VI), type: rich-text }
+      - { name: bioEn, label: Biography (EN), type: rich-text }
+      - { name: approachVi, label: Triết lý thiết kế (VI), type: text }
+      - { name: approachEn, label: Approach (EN), type: text }
+      - { name: locationVi, label: Khu vực (VI), type: string }
+      - { name: locationEn, label: Location (EN), type: string }
+      - { name: email, label: Email liên hệ, type: string }
+      - { name: phone, label: Điện thoại (tùy chọn), type: string }
+      - { name: instagram, label: Instagram URL, type: string }
+      - { name: behance, label: Behance URL, type: string }
+      - { name: linkedin, label: LinkedIn URL, type: string }
+      - { name: portrait, label: Ảnh chân dung, type: image }
+      - { name: cvUrl, label: Link CV PDF (tùy chọn), type: string }
+      - { name: demoMode, label: Hiện cảnh báo nội dung demo, type: boolean }
+      - { name: showJournal, label: Hiển thị menu Journal, type: boolean }
+
+  - name: services
+    label: Lĩnh vực chuyên môn
+    type: file
+    path: content/services.json
+    format: json
+    list: true
+    fields:
+      - { name: code, label: Mã / số thứ tự, type: string }
+      - { name: titleVi, label: Chuyên môn (VI), type: string }
+      - { name: titleEn, label: Expertise (EN), type: string }
+      - { name: summaryVi, label: Mô tả (VI), type: text }
+      - { name: summaryEn, label: Description (EN), type: text }
